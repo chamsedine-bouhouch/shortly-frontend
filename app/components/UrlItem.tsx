@@ -3,9 +3,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
+import { API_BASE_URL } from "../config/api"
 
 async function deleteUrl(shortCode: string) {
-  const response = await fetch(`/api/${shortCode}`, { method: "DELETE" })
+  const response = await fetch(`${API_BASE_URL}/url-shortener/${shortCode}`, { method: "DELETE" })
   if (!response.ok) {
     throw new Error("Failed to delete URL")
   }
@@ -36,12 +37,12 @@ export default function UrlItem({ url }: { url: any }) {
     <div className="flex items-center justify-between p-4 bg-white shadow rounded-lg">
       <div>
         <a
-          href={`/${url.shortCode}`}
+          href={`${API_BASE_URL}/url-shortener/${url.shortCode}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-600 hover:underline"
         >
-          {`${typeof window !== "undefined" ? window.location.origin : ""}/${url.shortCode}`}
+          {`${API_BASE_URL}/url-shortener/${url.shortCode}`}
         </a>
         <p className="text-sm text-gray-500 truncate">{url.originalUrl}</p>
       </div>

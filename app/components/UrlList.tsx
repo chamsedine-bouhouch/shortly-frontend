@@ -2,9 +2,10 @@
 
 import { useQuery } from "@tanstack/react-query"
 import UrlItem from "./UrlItem"
+import { API_BASE_URL } from "../config/api"
 
 async function fetchUrls() {
-  const response = await fetch("/api/urls")
+  const response = await fetch(`${API_BASE_URL}/url-shortener`)
   if (!response.ok) {
     throw new Error("Failed to fetch URLs")
   }
